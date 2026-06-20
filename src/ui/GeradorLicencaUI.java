@@ -107,7 +107,7 @@ public class GeradorLicencaUI extends javax.swing.JFrame {
                 btnExportarLicencaActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnExportarLicenca, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 520, 220, 30));
+        panelPrincipal.add(btnExportarLicenca, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 520, 220, 35));
 
         txtLicense.setColumns(20);
         txtLicense.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
@@ -125,11 +125,11 @@ public class GeradorLicencaUI extends javax.swing.JFrame {
                 btnGerarLicencaActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnGerarLicenca, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 190, 30));
+        panelPrincipal.add(btnGerarLicenca, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 190, 35));
 
         cmbLicenseType.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cmbLicenseType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE", "TRIAL", "MONTHLY", "ANNUAL", "LIFETIME" }));
-        panelPrincipal.add(cmbLicenseType, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 150, 30));
+        panelPrincipal.add(cmbLicenseType, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 150, 35));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("HWID");
@@ -153,7 +153,7 @@ public class GeradorLicencaUI extends javax.swing.JFrame {
                 btnGerarLicenca1ActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnGerarLicenca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 190, 30));
+        panelPrincipal.add(btnGerarLicenca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 190, 35));
 
         getContentPane().add(panelPrincipal);
 
@@ -335,7 +335,7 @@ if (valid) {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAvisoHWID;
     private javax.swing.JPanel panelPrincipal;
-    private javax.swing.JTextField txtEmail;
+    public javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHWID;
     private javax.swing.JTextArea txtLicense;
     // End of variables declaration//GEN-END:variables
