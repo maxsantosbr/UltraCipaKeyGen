@@ -29,17 +29,17 @@ public class Updater extends javax.swing.JFrame {
     // CONFIGURAÇÕES - ALTERE AQUI
     // =============================================
     // Versão atual do seu programa (ex: "1.0", "1.1", "2.0")
-    public static final String VERSAO_ATUAL = "1.0.0";
+    public static final String VERSAO_ATUAL = "1.1.0";
 
     // URL do arquivo de texto com a versão mais recente
     // Exemplo com GitHub Raw:
     // https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPO/main/version.txt
-    public static final String URL_VERSAO = "https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPO/main/version.txt";
+    public static final String URL_VERSAO = "https://raw.githubusercontent.com/maxsantosbr/UltraCipaKeyGenerator/main/version.txt";
 
     // URL para baixar o novo .jar
     // Exemplo com GitHub Releases:
     // https://github.com/SEU_USUARIO/SEU_REPO/releases/latest/download/MeuPrograma.jar
-    private static final String URL_DOWNLOAD_JAR = "https://github.com/SEU_USUARIO/SEU_REPO/releases/latest/download/MeuPrograma.jar";
+    private static final String URL_DOWNLOAD_JAR = "https://github.com/maxsantosbr/UltraCipaKeyGenerator/releases/latest/download/UltraCipaKeyGenerator.jar";
 
     // Nome do arquivo jar que será baixado
     private static final String NOME_JAR = "UltraCipaKeyGenerator.jar";
@@ -225,9 +225,9 @@ public class Updater extends javax.swing.JFrame {
     }//baixarAtualizacao
 
     /**
-     * PASSO 5: Substitui o jar antigo pelo novo e reinicia
-     * Estratégia: - Renomeia o jar atual para .bak - Renomeia o novo jar para o
-     * nome correto - Abre o novo jar com java -jar - Fecha este processo
+     * PASSO 5: Substitui o jar antigo pelo novo e reinicia Estratégia: -
+     * Renomeia o jar atual para .bak - Renomeia o novo jar para o nome correto
+     * - Abre o novo jar com java -jar - Fecha este processo
      */
     private void instalarAtualizacao() {
         try {
@@ -340,7 +340,7 @@ public class Updater extends javax.swing.JFrame {
                 btnVerificarActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 240, 36));
+        panelPrincipal.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 270, 36));
 
         lblStatus.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -355,6 +355,9 @@ public class Updater extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
+        GeradorLicencaUI glu = new GeradorLicencaUI();
+        glu.setVisible(true);
+        glu.txtEmail.requestFocus();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed

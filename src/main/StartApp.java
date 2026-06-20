@@ -5,6 +5,7 @@
  */
 package main;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import db.DatabaseInitializer;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import ui.Updater;
 import static ui.Updater.URL_VERSAO;
 import static ui.Updater.VERSAO_ATUAL;
@@ -24,26 +26,30 @@ import static ui.Updater.VERSAO_ATUAL;
  */
 public class StartApp {
 
-    public static void main(String[] args) {  
+    public static void main(String[] args) {
+
+        FlatLightLaf.setup();
+        UIManager.put("Button.arc", 999);
+        UIManager.put( "ProgressBar.arc", 999);
+        UIManager.put( "Component.arrowType", "chevron");
+        UIManager.put( "Component.focusWidth", 1);
+        UIManager.put( "TextComponent.arc", 999);
         
-        // Opção 1: Abrir a janela de atualização
+        
+
+//        verificarNaInicializacao();
+//         Opção 1: Abrir a janela de atualização
         SwingUtilities.invokeLater(() -> {
             new Updater().setVisible(true);
         });
-        
-        
-        DatabaseInitializer.initialize();         
-        Updater va = new Updater();
-        va.setVisible(true);
-        
-//        GeradorLicencaUI glu = new GeradorLicencaUI();       
-//        glu.setVisible(true);        
+
+        DatabaseInitializer.initialize();
+
     }//main  
-    
-    
+
     /**
-     * ALTERNATIVA: Verificar silenciosamente ao iniciar o programa
-     * Chame este método no main() do seu programa principal
+     * ALTERNATIVA: Verificar silenciosamente ao iniciar o programa Chame este
+     * método no main() do seu programa principal
      */
     public static void verificarNaInicializacao() {
         new Thread(() -> {
@@ -65,16 +71,20 @@ public class StartApp {
                     for (int i = 0; i < Math.max(partsA.length, partsB.length); i++) {
                         int a = (i < partsA.length) ? Integer.parseInt(partsA[i]) : 0;
                         int b = (i < partsB.length) ? Integer.parseInt(partsB[i]) : 0;
-                        if (a > b) { temAtualizacao = true; break; }
-                        if (a < b) break;
+                        if (a > b) {
+                            temAtualizacao = true;
+                            break;
+                        }
+                        if (a < b) {
+                            break;
+                        }
                     }
 
                     if (temAtualizacao) {
                         final boolean[] result = {false};
                         SwingUtilities.invokeAndWait(() -> {
-                            int resposta = JOptionPane.showConfirmDialog(null,
-                                    "Nova versão " + versaoRemota + " disponível!\nDeseja atualizar agora?",
-                                    "Atualização",
+                            int resposta = JOptionPane.showConfirmDialog(null, "NOVA VERSÃO " + versaoRemota + " DISPONÍVEL!\nDESEJA ATUALIZAR AGORA?",
+                                    "ATUALIZAÇÃO",
                                     JOptionPane.YES_NO_OPTION);
                             result[0] = (resposta == JOptionPane.YES_OPTION);
                         });
@@ -91,5 +101,5 @@ public class StartApp {
         }).start();
     }//VerificarNaInicializacao
     
-    
+
 }//StartApp
