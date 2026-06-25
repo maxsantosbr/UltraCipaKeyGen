@@ -34,8 +34,10 @@ public class GeradorLicencaUI extends javax.swing.JFrame {
      */
     public GeradorLicencaUI() {
         initComponents();
+        //Imagem do software
         ImageIcon iconUCKG = new ImageIcon(this.getClass().getClassLoader().getResource("img/UltraCipaKEY.png"));
         this.setIconImage(iconUCKG .getImage());
+        
         txtHWID.setText(util.HWID.get());
         txtHWID.setEditable(true);
         

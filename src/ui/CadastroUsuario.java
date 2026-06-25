@@ -41,28 +41,34 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
     }//Construtor
 
-    // ===== SALVAR (INSERT ou UPDATE) =====
-    private void btnSalvar() {
+    
+    private boolean validarCamposSalvarOuAtualizar() {
         char[] senha = txtSenhaCadastro.getPassword();
         String campoSenha = new String(senha);
         char[] repetirSenha = txtRepetirSenhaCadastro.getPassword();
         String campoRepetirSenha = new String(repetirSenha);
         int combo = comboPerfil.getSelectedIndex();
 
-        if (txtNomeCadastro.getText().isEmpty() || txtEmailCadastro.getText().isEmpty() || campoSenha.isEmpty() || campoRepetirSenha.isEmpty()) {
+        if (txtNomeCadastro.getText().isEmpty() || txtEmailCadastro.getText().isEmpty()
+                || campoSenha.isEmpty() || campoRepetirSenha.isEmpty()) {
             JOptionPane.showMessageDialog(this, "PREENCHA TODOS OS CAMPOS!");
-            return;
+            return false;
         }
-
         if (!campoSenha.equals(campoRepetirSenha)) {
             JOptionPane.showMessageDialog(this, "OS CAMPOS SENHA E REPETIR SENHA NÃO SÃO IGUAIS!");
             txtSenhaCadastro.requestFocus();
-            return;
+            return false;
         }
-
         if (combo == 0) {
             JOptionPane.showMessageDialog(this, "SELECIONE O PERFIL DO USUÁRIO!");
             comboPerfil.requestFocus();
+            return false;
+        }
+        return true;
+    }//validarCamposSalvarOuAtualizar
+
+    private void salvarUsuario() {
+        if (!validarCamposSalvarOuAtualizar()) {
             return;
         }
 
@@ -73,24 +79,37 @@ public class CadastroUsuario extends javax.swing.JFrame {
         u.setPerfil(comboPerfil.getSelectedItem().toString());
         u.setAtivo(checkAtivo.isSelected() ? 1 : 0);
 
-        if (idSelecionado == -1) {
-            // INSERT
-            if (dao.inserir(u)) {
-                JOptionPane.showMessageDialog(this, "USUÁRIO CADASTRADO COM SUCESSO!");
-                limparCampos();
-                carregarTabela();
-            }
-        } else {
-            // UPDATE
-            u.setId(idSelecionado);
-            if (dao.atualizar(u)) {
-                JOptionPane.showMessageDialog(this, "USUÁRIO ATUALIZADO COM SUCESSO!");
-                limparCampos();
-                carregarTabela();
-            }
+        if (dao.inserir(u)) {
+            JOptionPane.showMessageDialog(this, "USUÁRIO CADASTRADO COM SUCESSO!");
+            limparCampos();
+            carregarTabela();
+        }
+    }//btnSalvar
+
+    private void atualizarUsuario() {
+        if (!validarCamposSalvarOuAtualizar()) {
+            return;
         }
 
-    }
+        if (idSelecionado == -1) {
+            JOptionPane.showMessageDialog(this, "SELECIONE UM USUÁRIO NA TABELA PARA ATUALIZAR!");
+            return;
+        }
+
+        Usuario u = new Usuario();
+        u.setId(idSelecionado);
+        u.setNomeCompleto(txtNomeCadastro.getText().trim());
+        u.setEmail(txtEmailCadastro.getText().trim());
+        u.setSenha(new String(txtSenhaCadastro.getPassword()));
+        u.setPerfil(comboPerfil.getSelectedItem().toString());
+        u.setAtivo(checkAtivo.isSelected() ? 1 : 0);
+
+        if (dao.atualizar(u)) {
+            JOptionPane.showMessageDialog(this, "USUÁRIO ATUALIZADO COM SUCESSO!");
+            limparCampos();
+            carregarTabela();
+        }
+    }//atualizarUsuario
 
     private void configurarTabela() {
         DefaultTableModel model = new DefaultTableModel(
@@ -142,7 +161,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }
 
     // ===== EXCLUIR =====
-    private void btnExcluir() {
+    private void excluirUsuario() {
         if (idSelecionado == -1) {
             JOptionPane.showMessageDialog(this, "SELECIONE UM USUÁRIO NA TABELA (SE HOUVER)!");
             return;
@@ -282,8 +301,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
         });
         panelPrincipal.add(btnLimparCamposCadastroUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 520, 140, 40));
 
-        btnNovoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-cadastro-21.png"))); // NOI18N
-        btnNovoUsuario.setText("NOVO");
+        btnNovoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-atualizar-21.png"))); // NOI18N
+        btnNovoUsuario.setText("ATUALIZAR");
         btnNovoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoUsuarioActionPerformed(evt);
@@ -351,7 +370,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirUsuarioActionPerformed
-        btnExcluir();
+        excluirUsuario();
     }//GEN-LAST:event_btnExcluirUsuarioActionPerformed
 
     private void btnLimparCamposCadastroUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposCadastroUsuariosActionPerformed
@@ -359,11 +378,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparCamposCadastroUsuariosActionPerformed
 
     private void btnNovoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoUsuarioActionPerformed
-        // TODO add your handling code here:
+        atualizarUsuario();
     }//GEN-LAST:event_btnNovoUsuarioActionPerformed
 
     private void btnSalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarUsuarioActionPerformed
-        btnSalvar();
+        salvarUsuario();
     }//GEN-LAST:event_btnSalvarUsuarioActionPerformed
 
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked

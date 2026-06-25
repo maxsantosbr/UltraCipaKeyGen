@@ -16,6 +16,7 @@ import java.net.URL;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import ui.Login;
 import ui.Updater;
 import static ui.Updater.URL_VERSAO;
 import static ui.Updater.VERSAO_ATUAL;
@@ -35,13 +36,14 @@ public class StartApp {
         UIManager.put( "Component.focusWidth", 1);
         UIManager.put( "TextComponent.arc", 999);
         
+        Login login = new Login();
+        login.setVisible(true);     
         
-
-//        verificarNaInicializacao();
+        verificarNaInicializacao();
 //         Opção 1: Abrir a janela de atualização
-        SwingUtilities.invokeLater(() -> {
-            new Updater().setVisible(true);
-        });
+//        SwingUtilities.invokeLater(() -> {
+//            new Updater().setVisible(true);
+//        });
 
         DatabaseInitializer.initialize();
 
