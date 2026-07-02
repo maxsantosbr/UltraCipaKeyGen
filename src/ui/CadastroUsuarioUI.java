@@ -353,6 +353,11 @@ public class CadastroUsuarioUI extends javax.swing.JFrame {
 
     private void btnDesativarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesativarUsuarioActionPerformed
         String email = txtEmailCadastro.getText().trim();
+        int linhaSelecionada = tblUsuarios.getSelectedRow();
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(this, "SELECIONE UM USUÁRIO NA TABELA PARA NEGAR O SEU ACESSO AO SOFTWARE!");
+            return;
+        }
         bancoUsuarios.desativarUsuario(email);
         limparCampos();
         lerTabela();

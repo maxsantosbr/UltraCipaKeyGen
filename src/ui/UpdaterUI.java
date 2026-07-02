@@ -29,7 +29,7 @@ public class UpdaterUI extends javax.swing.JFrame {
     // CONFIGURAÇÕES - ALTERE AQUI
     // =============================================
     // Versão atual do seu programa (ex: "1.0", "1.1", "2.0")
-    public static final String VERSAO_ATUAL = "1.2.0";
+    public static final String VERSAO_ATUAL = "1.2.1";
 
     // URL do arquivo de texto com a versão mais recente
     // Exemplo com GitHub Raw:
@@ -354,7 +354,7 @@ public class UpdaterUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
